@@ -29,14 +29,15 @@ app.get("/api/konfigurasi-publik", (req, res) => {
   });
 });
 
-app.use(express.static(__dirname, {
+// Gunakan process.cwd() alih-alih __dirname
+app.use(express.static(process.cwd(), {
   extensions: ["html"],
   etag: true,
   maxAge: process.env.NODE_ENV === "production" ? "1h" : 0
 }));
 
 app.get("*", (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "index.html"));
+  res.status(404).sendFile(path.join(process.cwd(), "index.html"));
 });
 
 if (process.env.NODE_ENV !== "production") {

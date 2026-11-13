@@ -7,6 +7,7 @@
       "config": {
         "includeFiles": [
           "*.html",
+          "*.webmanifest",
           "admin/**",
           "akun/**",
           "assets/**",
@@ -17,9 +18,10 @@
       }
     }
   ],
-  "routes": [
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/js/(.*)", "dest": "/js/$1" },
-    { "src": "/(.*)", "dest": "app.js" }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/app.js"
+    }
   ]
 }
