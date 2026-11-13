@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Supabase local state
+.supabase/
+supabase/.branches/
+supabase/.temp/
+
+# Local build/cache/logs
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Patch backups and local database artifacts
+*.bak-*
+data/
+
+# OS/temp
+*.tmp
+*.swp
+repomix-output*.xml

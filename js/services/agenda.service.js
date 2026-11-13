@@ -1,0 +1,1 @@
+import{kueri}from"../core/api.js";export const daftarAgenda=()=>kueri(k=>k.from("agenda").select("*").order("mulai_pada"));export const simpanAgenda=(data,id=null)=>kueri(k=>id?k.from("agenda").update(data).eq("id",id).select().single():k.from("agenda").insert(data).select().single());

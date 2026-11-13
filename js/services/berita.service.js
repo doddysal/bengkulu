@@ -1,0 +1,13 @@
+import{kueri}from"../core/api.js";
+const kolom="id,judul,slug,kategori,ringkasan,isi,url_gambar,id_publik_gambar,status,pembuat_id,tanggal_terbit,dibuat_pada,diperbarui_pada,foto_album,nama_penulis,avatar_penulis,izinkan_komentar,jumlah_suka";
+export const daftarBeritaTerbit=(batas=20)=>kueri(k=>k.from("berita").select(kolom).eq("status","terbit").order("tanggal_terbit",{ascending:false}).limit(batas));
+export const daftarSemuaBerita=()=>kueri(k=>k.from("berita").select(kolom).order("dibuat_pada",{ascending:false}));
+export const ambilBerita=id=>kueri(k=>k.from("berita").select(kolom).eq("id",id).eq("status","terbit").single());
+export const simpanBerita=(data,id=null)=>kueri(k=>id?k.from("berita").update(data).eq("id",id).select().single():k.from("berita").insert(data).select().single());
+export const hapusBerita=id=>kueri(k=>k.from("berita").delete().eq("id",id));
+export const daftarKomentar=id=>kueri(k=>k.from("komentar_berita").select("*").eq("berita_id",id).order("dibuat_pada",{ascending:false}));
+export const tambahKomentar=data=>kueri(k=>k.from("komentar_berita").insert(data).select().single());
+export const hapusKomentar=id=>kueri(k=>k.from("komentar_berita").delete().eq("id",id));
+export const daftarSuka=id=>kueri(k=>k.from("suka_berita").select("id,pengguna_id").eq("berita_id",id));
+export const tambahSuka=data=>kueri(k=>k.from("suka_berita").insert(data).select().single());
+export const hapusSuka=(beritaId,penggunaId)=>kueri(k=>k.from("suka_berita").delete().eq("berita_id",beritaId).eq("pengguna_id",penggunaId));

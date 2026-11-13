@@ -1,0 +1,1 @@
+export function activeNav(){const current=location.pathname.split("/").pop()||"index.html";document.querySelectorAll("[data-nav]").forEach(a=>a.classList.toggle("active",a.getAttribute("href")===current));}

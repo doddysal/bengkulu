@@ -1,0 +1,5 @@
+create table if not exists public.pengaturan_situs(kunci text primary key,nilai text not null default '',diperbarui_pada timestamptz not null default now(),diperbarui_oleh uuid references auth.users(id));
+alter table public.pengaturan_situs enable row level security;
+drop policy if exists pengaturan_situs_baca on public.pengaturan_situs;create policy pengaturan_situs_baca on public.pengaturan_situs for select to anon,authenticated using(true);
+drop policy if exists pengaturan_situs_kelola on public.pengaturan_situs;create policy pengaturan_situs_kelola on public.pengaturan_situs for all to authenticated using(public.peran_saat_ini() in('admin','superadmin')) with check(public.peran_saat_ini() in('admin','superadmin'));
+insert into public.pengaturan_situs(kunci,nilai) values('header_atas','KOTA'),('header_bawah','BENGKULU'),('judul_situs','PMI Kota Bengkulu'),('logo_url','assets/images/logo-pmi-kota-bengkulu.png') on conflict(kunci) do nothing;

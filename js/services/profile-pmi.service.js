@@ -1,0 +1,1 @@
+import{kueri}from"/js/core/api.js";export const ambilProfilPmi=kode=>kueri(k=>k.from("profil_pmi").select("*").eq("kode_bagian",kode).maybeSingle());export const daftarProfilPmi=()=>kueri(k=>k.from("profil_pmi").select("*").order("kode_bagian"));export const simpanProfilPmi=data=>kueri(k=>k.from("profil_pmi").upsert(data,{onConflict:"kode_bagian"}).select().single());

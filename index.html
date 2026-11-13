@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PMI Kota Bengkulu</title>
+  
+  <!-- Favicon Standar -->
+  <link rel="icon" type="image/jpeg" href="/assets/icons/Favicon.jpg">
+  
+  <!-- Favicon khusus perangkat Apple (iOS) untuk menghilangkan peringatan -->
+  <link rel="apple-touch-icon" href="/assets/icons/Favicon.jpg">
+  
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/public.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="site-header" data-navbar></header>
+  
+  <main>
+    <div data-page-hero></div>
+    
+    <section id="program" class="section">
+      <div class="container">
+        <h2>Program Utama</h2>
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Pelayanan Relawan</h3>
+            <p class="muted">PMR, KSR, dan TSR dalam satu basis data.</p>
+          </article>
+          <article class="card">
+            <h3>Penanggulangan Bencana</h3>
+            <p class="muted">Informasi kesiapsiagaan dan respons kemanusiaan.</p>
+          </article>
+          <article class="card">
+            <h3>Pelatihan</h3>
+            <p class="muted">Agenda peningkatan kapasitas relawan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    
+    <section id="berita" class="section">
+      <div class="container">
+        <div class="home-section-title">
+          <h2>Berita Terbaru</h2>
+          <a href="/konten/berita/">Lihat Semua</a>
+        </div>
+        <div class="home-news-grid" data-latest-news>
+          <div class="empty">Memuat berita...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="site-footer" data-footer></footer>
+  
+  <script type="module" src="/js/public/navbar.js"></script>
+  <script type="module" src="/js/public/footer.js"></script>
+  <script type="module">
+    import { pasangHeroCms } from "/js/public/hero-cms.js";
+    pasangHeroCms(document.querySelector("[data-page-hero]"), {
+      kode: "hero_utama",
+      fallbackJudul: "Bergerak bersama untuk kemanusiaan di Kota Bengkulu."
+    });
+  </script>
+  <script type="module" src="/js/public/home.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js"));
+    }
+  </script>
+</body>
+</html>

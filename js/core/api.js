@@ -1,0 +1,2 @@
+import{ambilKlienSupabase}from"../config/supabase.js";
+export async function kueri(pembuat){const klien=await ambilKlienSupabase();const{data,error}=await pembuat(klien);if(error)throw error;return data;}

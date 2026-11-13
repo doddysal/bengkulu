@@ -1,0 +1,3 @@
+import{kueri}from"../core/api.js";
+export async function ambilPengaturanSitus(){const rows=await kueri(k=>k.from("pengaturan_situs").select("kunci,nilai"));return Object.fromEntries((rows||[]).map(x=>[x.kunci,x.nilai]));}
+export async function simpanPengaturanSitus(data){return kueri(k=>k.from("pengaturan_situs").upsert(Object.entries(data).map(([kunci,nilai])=>({kunci,nilai})),{onConflict:"kunci"}).select());}

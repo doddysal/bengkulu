@@ -1,0 +1,2 @@
+import { listGallery } from "../services/gallery.service.js";import { escapeHtml } from "../core/utils.js";
+const root=document.querySelector("[data-gallery]");if(root)listGallery().then(rows=>root.innerHTML=rows.map(x=>`<figure class="card"><img src="${escapeHtml(x.image_url)}" alt="${escapeHtml(x.title)}" style="width:100%"><figcaption>${escapeHtml(x.title)}</figcaption></figure>`).join(""));

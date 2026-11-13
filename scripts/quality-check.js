@@ -1,0 +1,6 @@
+const fs=require("fs"),path=require("path"),{spawnSync}=require("child_process");
+const root=path.resolve(__dirname,".."),ignored=new Set(["node_modules",".git",".temp"]);
+function walk(dir,files=[]){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){if(ignored.has(entry.name))continue;const full=path.join(dir,entry.name);if(entry.isDirectory())walk(full,files);else if(entry.name.endsWith(".js"))files.push(full)}return files}
+let failed=false;
+for(const file of walk(root)){const rel=path.relative(root,file).replaceAll("\\","/"),source=fs.readFileSync(file,"utf8"),browser=rel.startsWith("js/");const result=browser?spawnSync(process.execPath,["--input-type=module","--check"],{input:source,encoding:"utf8"}):spawnSync(process.execPath,["--check",file],{encoding:"utf8"});if(result.status!==0){failed=true;console.error(`FAIL ${rel}\n${result.stderr||result.stdout}`)}else console.log(`OK   ${rel}`)}
+if(failed)process.exit(1);console.log("Quality check selesai tanpa kesalahan sintaks JavaScript.");

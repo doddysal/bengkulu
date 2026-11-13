@@ -1,0 +1,3 @@
+import{kueri}from"../core/api.js";import{ambilSesi}from"../core/auth.js";
+export async function ambilProfilSaya(){const sesi=await ambilSesi();if(!sesi)return null;return kueri(k=>k.from("pengguna").select("*").eq("id",sesi.user.id).single())}
+export async function simpanProfilSaya(data){const sesi=await ambilSesi();if(!sesi)throw new Error("Sesi login tidak ditemukan.");return kueri(k=>k.from("pengguna").update(data).eq("id",sesi.user.id).select().single())}

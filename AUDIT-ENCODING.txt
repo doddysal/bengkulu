@@ -1,0 +1,18 @@
+Audit encoding: 2026-11-12 18:25:00
+File diperbaiki: 7
+
+DAFTAR FILE DIPERBAIKI:
+admin/agenda.html
+admin/galeri.html
+admin/index.html
+admin/relawan.html
+js/admin/berita-modern.js
+js/admin/pengguna-manajemen.js
+js/public/news.js
+
+KARAKTER MENCURIGAKAN TERSISA:
+admin/agenda.html:1: <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agenda ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚· Admin PMI Bengkulu</...
+admin/galeri.html:1: <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Galeri ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚· Admin PMI Bengkulu</...
+admin/index.html:1: <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚· Admin PMI Bengkul...
+admin/pengguna.html:1: <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Manajemen Pengguna | PMI Kota Bengkulu</title><...
+admin/relawan.html:1: <!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Relawan ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚· Admin PMI Bengkulu<...

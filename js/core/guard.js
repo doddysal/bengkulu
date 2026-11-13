@@ -1,0 +1,4 @@
+import{ambilSesi,ambilProfil}from"/js/core/auth.js";
+export async function wajibLogin(peran=[]){const sesi=await ambilSesi();if(!sesi){location.replace("/akun/login.html");return null}const profil=await ambilProfil();if(peran.length&&!peran.includes(profil?.peran)&&profil?.role_admin!=="superadmin"){location.replace("/index.html");return null}return{sesi,profil}}
+export async function wajibAkses(kode){const akses=await wajibLogin();if(!akses)return null;const hak=Array.isArray(akses.profil?.hak_akses)?akses.profil.hak_akses:[];if(akses.profil?.role_admin!=="superadmin"&&!hak.includes(kode)){location.replace("/admin/index.html?akses=ditolak");return null}return akses}
+export function punyaAkses(profil,kode){return profil?.role_admin==="superadmin"||(Array.isArray(profil?.hak_akses)&&profil.hak_akses.includes(kode))}

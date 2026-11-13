@@ -1,0 +1,1 @@
+import{kueri}from"../core/api.js";export const daftarGaleri=()=>kueri(k=>k.from("galeri").select("*").eq("tampil",true).order("dibuat_pada",{ascending:false}));export const simpanGaleri=data=>kueri(k=>k.from("galeri").insert(data).select().single());

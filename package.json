@@ -1,0 +1,23 @@
+{
+    "name":  "pmi-kota-bengkulu",
+    "version":  "1.0.0",
+    "private":  true,
+    "type":  "commonjs",
+    "scripts":  {
+                    "start":  "node server.js",
+                    "dev":  "node --watch server.js",
+                    "admin:test":  "node scripts/buat-admin-testing.js",
+                    "db:push":  "node scripts/push-database-supabase.js",
+                    "check":  "node scripts/quality-check.js"
+                },
+    "dependencies":  {
+                         "@supabase/supabase-js":  "^2.47.10",
+                         "dotenv":  "^16.4.7",
+                         "express":  "^4.21.2",
+                         "helmet":  "^8.0.0",
+                         "pg":  "^8.13.1"
+                     },
+    "devDependencies":  {
+                            "supabase":  "^3.1.0"
+                        }
+}
