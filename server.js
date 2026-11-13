@@ -43,3 +43,4 @@ app.listen(port, () => {
   console.log(`PMI Kota Bengkulu aktif: http://localhost:${port}`);
   console.log(`Status server: http://localhost:${port}/api/status`);
 });
+module.exports = app;
