@@ -39,8 +39,10 @@ app.get("*", (req, res) => {
   res.status(404).sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(port, () => {
-  console.log(`PMI Kota Bengkulu aktif: http://localhost:${port}`);
-  console.log(`Status server: http://localhost:${port}/api/status`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`PMI Kota Bengkulu aktif: http://localhost:${port}`);
+    console.log(`Status server: http://localhost:${port}/api/status`);
+  });
+}
 module.exports = app;
