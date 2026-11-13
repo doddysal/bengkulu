@@ -40,3 +40,4 @@
 4. Semua import browser memakai path absolut `/js/...` dan `/assets/...`.
 5. File `.env`, `supabase/.temp/`, hasil Repomix, dan backup patch tidak masuk Git.
 6. Teks source disimpan sebagai UTF-8 tanpa BOM.
+
