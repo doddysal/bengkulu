@@ -1,4 +1,4 @@
-const CACHE = "pmi-bengkulu-v25-v2";
+const CACHE = "pmi-bengkulu-v27";
 const INTI = ["/", "/index.html", "/assets/css/variables.css", "/assets/css/components.css", "/assets/css/public.css"];
 self.addEventListener("install", event => { self.skipWaiting(); event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(INTI))); });
 self.addEventListener("activate", event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())); });

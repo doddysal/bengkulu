@@ -27,3 +27,4 @@ data/
 *.tmp
 *.swp
 repomix-output*.xml
+supabase/functions/.env

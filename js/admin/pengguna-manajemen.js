@@ -153,7 +153,7 @@ form.addEventListener("submit", async (event) => {
   try {
     await perbaruiPengguna(form.elements.id.value, data);
     rows = rows.map((item) => item.id === form.elements.id.value ? { ...item, ...data } : item);
-    status.textContent = "Tersimpan.";
+    status.textContent = hasil?.message || "Tersimpan.";
     setTimeout(() => { closeDialog(); render(); }, 450);
   } catch (error) {
     status.textContent = error.message;
