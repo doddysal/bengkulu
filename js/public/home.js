@@ -1,23 +1,7 @@
-import { daftarBeritaTerbit } from "/js/services/berita.service.js";
-import { escapeHtml, formatDate } from "/js/core/utils.js";
-
-const root = document.querySelector("[data-latest-news]");
-const teksBersih = (nilai = "") => String(nilai).replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
-
-if (root) {
-  daftarBeritaTerbit(3).then((baris) => {
-    root.innerHTML = baris.length ? baris.map((berita) => `
-      <a class="home-news-card" href="/konten/berita/detail.html?id=${encodeURIComponent(berita.id)}">
-        <div class="home-news-image"><img src="${escapeHtml(berita.url_gambar || "/assets/images/news-placeholder.svg")}" alt="${escapeHtml(berita.judul)}" loading="lazy"></div>
-        <div class="home-news-body">
-          <div class="home-news-meta"><span>${escapeHtml(berita.kategori || "Berita")}</span><time>${formatDate(berita.tanggal_terbit || berita.dibuat_pada)}</time></div>
-          <h3>${escapeHtml(berita.judul)}</h3>
-          <p>${escapeHtml(berita.ringkasan || teksBersih(berita.isi).slice(0, 145))}</p>
-          <b>Baca Selengkapnya</b>
-        </div>
-      </a>`).join("") : `<div class="empty">Belum ada berita diterbitkan.</div>`;
-  }).catch((error) => {
-    console.error("Berita homepage gagal dimuat:", error);
-    root.innerHTML = `<div class="empty">Gagal memuat berita: ${escapeHtml(error.message)}</div>`;
-  });
-}
+import{daftarBeritaTerbit,ringkasanInteraksi}from"/js/services/berita.service.js";import{escapeHtml,formatDate}from"/js/core/utils.js";
+const root=document.querySelector("[data-latest-news]");const clean=(v="")=>String(v).replace(/<[^>]*>/g," ").replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();const image=x=>escapeHtml(x.url_gambar||"/assets/images/news-placeholder.svg"),href=x=>`/konten/berita/detail.html?id=${encodeURIComponent(x.id)}`;
+function social(row){const avatars=row.avatar_penyuka||[];const initials=Math.max(0,Math.min(Number(row.jumlah_suka||0)-avatars.length,3));return `<div class="news-social-proof"><div class="news-like-avatars">${avatars.map((url,i)=>`<img src="${escapeHtml(url)}" alt="Penyuka ${i+1}" loading="lazy">`).join("")}${Array.from({length:initials},(_,i)=>`<span aria-hidden="true">${i+1}</span>`).join("")}</div><strong>${Number(row.jumlah_suka||0).toLocaleString("id-ID")} Suka</strong></div>`}
+function side(x){return `<a class="home-news-side-card" href="${href(x)}"><img src="${image(x)}" alt="${escapeHtml(x.judul)}"><div><span>${escapeHtml(x.kategori||"Berita")}</span><h3>${escapeHtml(x.judul)}</h3><small>${formatDate(x.tanggal_terbit||x.dibuat_pada)}</small>${social(x)}<b>Detail</b></div></a>`}
+function small(x){return `<a class="home-news-small-card" href="${href(x)}"><img src="${image(x)}" alt="${escapeHtml(x.judul)}"><div><span>${escapeHtml(x.kategori||"Berita")}</span><h3>${escapeHtml(x.judul)}</h3><p>${escapeHtml(x.ringkasan||clean(x.isi).slice(0,95))}</p>${social(x)}<small>${formatDate(x.tanggal_terbit||x.dibuat_pada)}</small></div></a>`}
+async function render(){if(!root)return;try{const rows=await daftarBeritaTerbit(7);if(!rows.length){root.innerHTML='<div class="empty">Belum ada berita diterbitkan.</div>';return}let summary=[];try{summary=await ringkasanInteraksi(rows.map(x=>x.id))}catch(error){console.warn("Ringkasan like belum tersedia",error)}const map=new Map((summary||[]).map(x=>[x.berita_id,x]));rows.forEach(x=>Object.assign(x,map.get(x.id)||{jumlah_suka:0,avatar_penyuka:[]}));const[main,...rest]=rows,sideRows=rest.slice(0,2),bottom=rest.slice(2,6);root.innerHTML=`<div class="home-news-showcase"><a class="home-news-featured" href="${href(main)}"><div class="home-news-featured-image"><img src="${image(main)}" alt="${escapeHtml(main.judul)}"><span>${escapeHtml(main.kategori||"Berita")}</span></div><div class="home-news-featured-copy"><small>${formatDate(main.tanggal_terbit||main.dibuat_pada)}</small><h2>${escapeHtml(main.judul)}</h2><p>${escapeHtml(main.ringkasan||clean(main.isi).slice(0,230))}</p>${social(main)}<b>Baca Selengkapnya</b></div></a><aside class="home-news-side">${sideRows.map(side).join("")}</aside></div>${bottom.length?`<div class="home-news-more">${bottom.map(small).join("")}</div>`:""}`;}catch(error){root.innerHTML=`<div class="empty">${escapeHtml(error.message)}</div>`}}
+render();

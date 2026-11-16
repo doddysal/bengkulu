@@ -35,6 +35,13 @@ function renderIkonSuka(disukai) {
   return `<span class="like-icon ${disukai ? "liked" : ""}" aria-hidden="true"></span>`;
 }
 
+function renderAvatar(url, nama, className = "comment-avatar") {
+  return `<span class="${className}">${url
+    ? `<img src="${escapeHtml(url)}" alt="Avatar ${escapeHtml(nama || "pengguna")}">`
+    : `<b>${escapeHtml((nama || "?").charAt(0).toUpperCase())}</b>`
+  }</span>`;
+}
+
 function renderKomentar() {
   if (!berita.izinkan_komentar) return "";
   const daftar = komentar.map((item) => {
@@ -42,24 +49,31 @@ function renderKomentar() {
       sesi.user.id === item.pengguna_id ||
       ["admin", "superadmin"].includes(profil?.peran)
     );
-    return `<article>
-      <b>${escapeHtml(item.nama_pengguna)}</b>
-      <small>${formatDate(item.dibuat_pada)}</small>
-      <p>${escapeHtml(item.isi)}</p>
-      ${bolehHapus ? `<button type="button" data-del-comment="${item.id}">Hapus</button>` : ""}
+    return `<article class="comment-card">
+      ${renderAvatar(item.avatar_url, item.nama_pengguna)}
+      <div class="comment-body">
+        <div class="comment-head">
+          <div><b>${escapeHtml(item.nama_pengguna)}</b><small>${formatDate(item.dibuat_pada)}</small></div>
+          ${bolehHapus ? `<button type="button" data-del-comment="${item.id}">Hapus</button>` : ""}
+        </div>
+        <p>${escapeHtml(item.isi)}</p>
+      </div>
     </article>`;
   }).join("");
 
   const formulir = sesi
     ? `<form data-comment-form>
-        <textarea name="isi" required maxlength="2000" placeholder="Tulis komentar..."></textarea>
+        <div class="comment-compose">
+          ${renderAvatar(profil?.avatar_url, profil?.nama || sesi.user.email, "comment-avatar comment-avatar-small")}
+          <textarea name="isi" required maxlength="2000" placeholder="Tulis komentar..."></textarea>
+        </div>
         <button class="btn btn-primary" type="submit">Kirim komentar</button>
       </form>`
     : `<div class="login-comment">Silakan <a href="/akun/login.html">masuk</a> untuk menyukai dan berkomentar.</div>`;
 
   return `<section class="comments">
     <h2>Komentar (${komentar.length})</h2>
-    <div>${daftar}</div>
+    <div class="comment-list">${daftar}</div>
     ${formulir}
   </section>`;
 }
@@ -128,6 +142,7 @@ function pasangInteraksi() {
       berita_id: id,
       pengguna_id: sesi.user.id,
       nama_pengguna: profil?.nama || sesi.user.email.split("@")[0],
+      avatar_url: profil?.avatar_url || null,
       isi
     });
     komentar = await daftarKomentar(id);
