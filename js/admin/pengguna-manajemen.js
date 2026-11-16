@@ -166,4 +166,4 @@ document.querySelectorAll("[data-tab]").forEach((button) => button.addEventListe
 }));
 search.addEventListener("input", () => { page = 1; render(); });
 roleFilter.addEventListener("change", () => { page = 1; render(); });
-render();
+document.querySelector("[data-refresh-users]")?.addEventListener("click",()=>location.reload());render();

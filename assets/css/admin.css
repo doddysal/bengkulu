@@ -1502,3 +1502,5 @@
   .toolbar-group,
   .search-input { width: 100%; }
 }
+/* PATCH-25-USER-SYNC */
+.admin-users-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}

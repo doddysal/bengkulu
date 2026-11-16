@@ -249,3 +249,50 @@ footer.footer-v2{display:block!important;width:100%!important;margin-top:auto!im
   .site-header .brand-copy strong,.site-header .brand-copy span{font-size:15px!important}
   .site-header .nav-toggle{flex-basis:46px!important;width:46px!important;height:46px!important}
 }
+/* PATCH-26-V2-SOFT-CARD */
+@media(max-width:760px){
+  #program.section{padding:58px 0 70px!important;background:#f8fafc!important}
+  #program .container{width:min(calc(100% - 32px),1180px)!important}
+  #program h2{margin:0 0 28px!important;font-size:30px!important;line-height:1.16!important;color:#0f172a!important}
+  #program .grid,#program .grid-3{display:grid!important;grid-template-columns:1fr!important;gap:20px!important}
+  #program .card{min-height:0!important;padding:32px 30px!important;border:1px solid #dfe5ed!important;border-radius:20px!important;background:#fff!important;box-shadow:0 12px 30px rgba(15,23,42,.045)!important;outline:0!important}
+  #program .card h3{margin:0 0 16px!important;font-size:21px!important;line-height:1.3!important;color:#0f172a!important}
+  #program .card p{margin:0!important;font-size:16px!important;line-height:1.58!important;color:#64748b!important}
+}
+@media(max-width:390px){
+  #program .container{width:min(calc(100% - 26px),1180px)!important}
+  #program .grid,#program .grid-3{gap:18px!important}
+  #program .card{padding:28px 25px!important;border-color:#e2e8f0!important;border-radius:19px!important;box-shadow:0 10px 26px rgba(15,23,42,.04)!important}
+  #program .card h3{font-size:19px!important}
+  #program .card p{font-size:15px!important}
+}
+/* PATCH-26-MOBILE-CARD-NAVBAR */
+@media(max-width:760px){
+  .site-header,.site-header .nav{min-height:70px!important}
+  .site-header .nav{padding:8px 14px!important;gap:9px!important}
+  .site-header .brand{gap:9px!important}
+  .site-header .brand-logo{height:43px!important;max-width:126px!important}
+  .site-header .brand-copy{padding-left:9px!important;border-left-width:2px!important}
+  .site-header .brand-copy strong,.site-header .brand-copy span{font-size:15px!important;line-height:.96!important}
+  .site-header .nav-toggle{flex-basis:44px!important;width:44px!important;height:44px!important;border-radius:12px!important;gap:5px!important}
+  .site-header .nav-toggle span{width:22px!important}
+
+  #program.section{padding:54px 0 64px!important}
+  #program .container{width:min(calc(100% - 30px),1180px)!important}
+  #program h2{margin:0 0 26px!important;font-size:30px!important;line-height:1.18!important}
+  #program .grid,#program .grid-3{display:grid!important;grid-template-columns:1fr!important;gap:18px!important}
+  #program .card{min-height:0!important;padding:28px 26px!important;border:1px solid #dce3ec!important;border-radius:18px!important;background:#fff!important;box-shadow:0 10px 28px rgba(15,23,42,.055)!important}
+  #program .card h3{margin:0 0 14px!important;font-size:21px!important;line-height:1.3!important;color:#0f172a!important}
+  #program .card p{margin:0!important;font-size:16px!important;line-height:1.55!important;color:#64748b!important}
+}
+@media(max-width:390px){
+  .site-header,.site-header .nav{min-height:66px!important}
+  .site-header .nav{padding:7px 11px!important}
+  .site-header .brand-logo{height:39px!important;max-width:114px!important}
+  .site-header .brand-copy strong,.site-header .brand-copy span{font-size:14px!important}
+  .site-header .nav-toggle{flex-basis:42px!important;width:42px!important;height:42px!important}
+  #program .container{width:min(calc(100% - 24px),1180px)!important}
+  #program .card{padding:24px 22px!important;border-radius:17px!important}
+  #program .card h3{font-size:19px!important}
+  #program .card p{font-size:15px!important}
+}
